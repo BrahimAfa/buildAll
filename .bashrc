@@ -1,5 +1,0 @@
-export JENKINS_USER=""
-export JENKINS_ACCESS_KEY=""
-export JENKINS_HOST=""
-export JENKINS_PORT=""
-export JENKINS_TOKEN=""
