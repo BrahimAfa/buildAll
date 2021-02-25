@@ -1,0 +1,19 @@
+FROM node:12-alpine
+
+WORKDIR /usr/src/app
+
+# set ENV vars
+# vars will be replaced during runtime.
+ENV PORT APP_PORT
+ENV NODE_ENV production
+ENV DB_HOST APP_DB_HOST
+ENV DB_USER APP_DB_USER
+ENV DB_DB_PASSWORD APP_DB_DB_PASSWORD
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+CMD [ "npm", "start" ]

@@ -1,0 +1,52 @@
+pipeline {
+    agent { label 'iamJenkins' }
+
+    stages {
+        stage('Clone repo') {
+            steps{
+                //  check if this repo is private with :  repository.private
+                git 'repository.clone_url'
+            }
+        }
+
+        stage('Install & Build') {
+            steps {
+                sh 'npm install'
+                sh 'npm run build --if-present'
+            }
+        }
+        stage('Add Dockerfile') {
+            steps {
+                // add the appropriate dockerfile to this repo based on the appTypeVar
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                // check if app is running or already exist (docker rmi -f)
+                sh 'docker build -t ${sender.login/repository.name} .'
+            }
+            post{
+                success{
+                    notify that app built sucess
+                }
+                failure {
+                    building faild send a request to generatelink app that app faild
+                }
+	        }
+        }
+         stage('Docker Run') {
+            steps {
+                // check if app is running or already exist (docker rmi -f)
+                sh 'run '
+            }
+            post{
+                success{
+                    notify that the app is in a success state
+                }
+                failure {
+                    run faild send a request to generatelink app that the app faild
+                }
+	        }
+        }
+    }
+}
