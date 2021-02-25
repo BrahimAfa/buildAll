@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+const { log } = require('console');
 const express = require('express');
 const fs = require('fs');
 
@@ -6,7 +7,10 @@ const router = express.Router();
 const { resolvePipline } = require('../utils/functions');
 
 router.all('/:pipline', async (req, res) => {
-    fs.writeFile('github.json', req.data);
+    console.log(req.data);
+    fs.writeFile('github.json', req.data, (err) => {
+        console.log(err);
+    });
     console.log(req.params);
     const { pipline } = req.params;
     const { appType } = req.query;
