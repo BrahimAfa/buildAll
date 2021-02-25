@@ -1,10 +1,12 @@
 /* eslint-disable camelcase */
 const express = require('express');
+const fs = require('fs');
 
 const router = express.Router();
 const { resolvePipline } = require('../utils/functions');
 
-router.get('/:pipline', async (req, res) => {
+router.all('/:pipline', async (req, res) => {
+    fs.writeFile('github.json', req.data);
     console.log(req.params);
     const { pipline } = req.params;
     const { appType } = req.query;
