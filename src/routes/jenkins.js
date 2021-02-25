@@ -7,8 +7,8 @@ const router = express.Router();
 const { resolvePipline } = require('../utils/functions');
 
 router.all('/:pipline', async (req, res) => {
-    console.log(req.data);
-    fs.writeFile('github.json', req.data, (err) => {
+    console.log(req.body);
+    fs.writeFile('github.json', req.body, (err) => {
         console.log(err);
     });
     console.log(req.params);
