@@ -1,0 +1,24 @@
+{
+    "app":{
+        "name": "Link Generator"
+    },
+    "db": {
+        "host": "DB_HOST",
+        "name": "DB_NAME",
+        "user": "DB_USER",
+        "password": "DB_PASSWORD"
+    },
+    "jenkins": {
+        "user":"JENKINS_USER",
+        "accessKey":"JENKINS_ACCESS_KEY",
+        "host": "JENKINS_HOST",
+        "port": "JENKINS_PORT",
+        "token": "JENKINS_TOKEN",
+        "password": "JENKINS_PASSWORD"
+    },
+    "jwt": {
+        "key": "JWT_KEY",
+        "ttl":"JWT_TTL",
+        "refresh_ttl":"JWT_REFRESH_TTL"
+    }
+}
