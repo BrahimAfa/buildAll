@@ -1,0 +1,49 @@
+version: '3.5'
+
+services:
+    mysql:
+        image: mysql
+        container_name: mysql2
+        hostname: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        env_file:
+            - .env
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        volumes:
+            - vol_mysql_data_2:/var/lib/mysql
+            - ./DB_SHARED_FILES:/DB_SHARED_FILES
+    nginx:
+        image: nginx
+        container_name: nginx
+        hostname: nginx
+        restart: always
+        ports:
+            - "8999:80"
+        env_file:
+            - .env
+
+        volumes:
+            - ./nginx/config:/etc/nginx/conf.d
+            - ./nginx/html:/usr/share/nginx/html
+    adminer:
+        image: adminer
+        restart: always
+        container_name: adminer2
+        hostname: adminer
+        env_file:
+            - .env
+        environment:
+            ADMINER_DEFAULT_SERVER: ${ADMINER_DEFAULT_SERVER}
+        ports:
+            - "8780:8080"
+        depends_on:
+            - mysql
+volumes:
+    vol_mysql_data_2:
+        name: vol_mysql_data_2
+networks:
+  default:
+    external:
+      name: ensas-net

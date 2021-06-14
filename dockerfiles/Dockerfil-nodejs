@@ -1,0 +1,2 @@
+FROM brahimafa/ensas-php
+COPY --chown=www-data:www-data  . /var/www/html

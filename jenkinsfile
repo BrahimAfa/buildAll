@@ -40,7 +40,7 @@ pipeline {
                 sh 'run '
             }
             post{
-                success{
+                success {
                     notify that the app is in a success state
                 }
                 failure {

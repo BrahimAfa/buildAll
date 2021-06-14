@@ -11,7 +11,10 @@ ENV DB_USER APP_DB_USER
 ENV DB_DB_PASSWORD APP_DB_DB_PASSWORD
 
 COPY package*.json ./
-
+Partager
+Enregistrer
+Valloch Gaming
+5
 RUN npm install
 
 COPY . .

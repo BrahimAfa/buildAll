@@ -1,0 +1,11 @@
+POST http://localhost:3333/build HTTP/1.1
+Content-Type: application/json
+
+{
+    "customPort": 80,
+    "repository": "https://github.com/BrahimAfa/ENSAS-surveillance",
+    "projectType": "php",
+    "dbType": "mysql2",
+    "dbName": "surviance",
+    "sqlFile": "file.sql"
+}
