@@ -20,7 +20,7 @@ services:
         hostname: nginx
         restart: always
         ports:
-            - "8999:80"
+            - "80:80"
         env_file:
             - .env
 
@@ -40,9 +40,25 @@ services:
             - "8780:8080"
         depends_on:
             - mysql
+    mssql:
+        image: "microsoft/mssql-server-linux"
+        restart: always
+        container_name: mssql
+        hostname: mssql
+        env_file:
+            - .env
+        ports:
+            - "1433:1433"
+        environment:
+            SA_PASSWORD: ${MSSQL_PASSWORD}
+            ACCEPT_EULA: "Y"
+        volumes:
+            - vol_mssql_data:/var/opt/mssql
 volumes:
     vol_mysql_data_2:
         name: vol_mysql_data_2
+    vol_mssql_data:
+        name: vol_mssql_data
 networks:
   default:
     external:

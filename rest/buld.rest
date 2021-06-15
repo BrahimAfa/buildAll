@@ -9,3 +9,23 @@ Content-Type: application/json
     "dbName": "surviance",
     "sqlFile": "file.sql"
 }
+
+###
+
+POST http://localhost:3333/build HTTP/1.1
+Content-Type: application/json
+
+
+# simple Structure good :  https://github.com/carltonstith/asp-dot-net-core-mvc-crud.git
+# https://github.com/yoyomooc/asp.net-core--for-beginner.git
+# https://github.com/CodAffection/Asp.Net-Core-5.0-Web-API-CRUD-with-Angular-11.git
+
+{
+    "customPort": 80,
+    "repository": "https://github.com/yoyomooc/asp.net-core--for-beginner.git",
+    "projectType": "core",
+    "dbType": "mssql",
+    "dbName": "DBDB",
+    "sqlFile": "file.sql"
+}
+

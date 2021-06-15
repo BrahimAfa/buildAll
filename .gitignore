@@ -2,3 +2,5 @@ node_modules/
 .bashrc
 github.json
 .env
+*.ensas-conf
+*.logs
