@@ -18,7 +18,7 @@ const defaultPort = (projectType, customPort) => {
     }
 };
 // const body =
-router.post('/build', async (req, res) => {
+router.post('/', async (req, res) => {
     const { body } = req;
     console.log(req.body);
     const repoInfo = {};

@@ -1,0 +1,15 @@
+{
+    "app": {
+        "name": "DUPLO",
+        "env":"development"
+    },
+    "db": {
+        "host": "mongodb://localhost/duplo",
+        "username":"",
+        "password": ""
+    },
+    "jwt": {
+        "key": "brahim123",
+        "ttl":"365d"
+    }
+}

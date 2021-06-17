@@ -25,7 +25,7 @@ async function cloneRepoAndAddDockerFile({ repository, projectType, folderName, 
     let result = await exec(`cd /repos; git clone ${repository} ${folderName}`); // FIXEME : add clone name to this!!
     let HandledResult = handleShellresult(result, step);
     if (HandledResult.status !== 200) {
-        if (HandledResult.status === 500) {
+        if (HandledResult.status === 500) { // repo already exist
             result = await exec(`cd /repos/${folderName} ; git pull`);
             HandledResult = handleShellresult(result, step);
             if (HandledResult.status !== 200) return send(HandledResult.data, HandledResult.status);

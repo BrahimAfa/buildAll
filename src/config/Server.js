@@ -1,6 +1,6 @@
 const http = require('http');
-
-const PORT = process.env.PORT || 3333; // 
+const { PORT } = require('../utils/constants');
+const { initializeDB, closeDB } = require('./database');
 
 let httpServer;
 function initServer(app) {
@@ -36,6 +36,7 @@ const Startup = async (app) => {
     try {
         // awaiting the Promise to Resolve Or reject...
         await initServer(app);
+        await initializeDB();
         console.log(`Server is Live on ${PORT} 🚀`);
     } catch (err) {
         console.log('Server is not running...⚠⚠', err);
@@ -49,6 +50,7 @@ const Shutdown = async (Uncaughtex) => {
         console.log('Shutting down Server...');
         console.log(err);
         await close();
+        await closeDB();
     } catch (ex) {
         err = err || ex;
         // log with winston Later..:);

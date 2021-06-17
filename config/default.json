@@ -1,0 +1,15 @@
+{
+    "app":{
+        "name": "DUPLO",
+        "env":"development"
+    },
+    "db": {
+        "host": "mongodb://localhost/buildingmanaer",
+        "username":"",
+        "password": ""
+    },
+    "jwt": {
+        "key": "brahim123456",
+        "ttl":"365d"
+    }
+}

@@ -11,7 +11,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "config": "^3.3.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.12.14"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
