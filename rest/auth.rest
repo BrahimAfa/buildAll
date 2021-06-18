@@ -1,0 +1,26 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGNkMWYyOGIwMDY3OWQ4NjEyNTQ3ZTUiLCJjbmUiOiJka3NsbWtkbXFscyIsImlhdCI6MTYyNDA1NTU5MiwiZXhwIjoxNjU1NTkxNTkyfQ.4Aw7ckv-yqM8UR4ngT7dmzIETmwN_4aJ9Vr4H9JSr2U
+
+
+POST http://localhost:3333/auth/register HTTP/1.1
+Content-Type: application/json
+x-auth-token: {{token}}
+
+{
+    "firstName": "Brahim",
+    "lastName":"AFASSY" ,
+    "cne": "dkslmkdmqls",
+    "password": "lsjdlksjdsql",
+    "email": "hello@ds.com"
+
+}
+
+###
+POST http://localhost:3333/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "password": "lsjdksjdsql",
+    "email": "hello@ds.com"
+
+}
+

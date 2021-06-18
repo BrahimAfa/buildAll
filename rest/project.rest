@@ -1,0 +1,32 @@
+GET http://localhost:3333/project HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "hello",
+    "dbType":"MYSQL" ,
+    "projectType": "dkslmkdmqls",
+    "repository": "ghskjdlms"
+}
+
+###
+
+DELETE  http://localhost:3333/project/all HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "hello",
+    "dbType":"MYSQL" ,
+    "projectType": "dkslmkdmqls",
+    "repository": "ghskjdlms"
+}
+
+###
+DELETE  http://localhost:3333/project/60cb3ab52731e6507289a4dd HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "hello",
+    "dbType":"MYSQL" ,
+    "projectType": "dkslmkdmqls",
+    "repository": "ghskjdlms"
+}
