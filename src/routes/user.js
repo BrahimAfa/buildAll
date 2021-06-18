@@ -1,36 +1,36 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable camelcase */
 const express = require('express');
-const User = require('../models/user');
-const { to } = require('../utils/functions');
+const { createUser, getUser, getUsers, deleteUser } = require('../controllers/user');
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-    const { body } = req;
-    const user = new User(body);
-    const { result, error } = await to(user.save());
-    if (error) return res.status(400).json(error.message);
-    if (!result) return res.status(400).json('user_not_found');
-    return res.json(result);
-});
-
 router.get('/', async (req, res) => {
-    const fields = [''];
     const filters = {};
-    const { result, error } = await to(User.find(filters, fields));
-    if (error) return res.status(400).json(error.message);
-    if (!result) return res.status(404).json('user_not_found');
-    return res.json(result);
+    const result = await getUsers({ filters });
+    if (result.status !== 200) return res.status(result.status).json(result.data);
+    return res.json(result.data);
 });
 
 router.get('/:id', async (req, res) => {
-    const { params } = req;
-    const fields = [];
-    const filters = { _id: params.id };
-    const { result, error } = await to(User.findOne(filters, fields));
-    if (error) return res.status(400).json(error.message);
-    if (!result) return res.status(404).json('user_not_found');
-    return res.json(result);
+    const { id } = req.params;
+    const result = await getUser({ filters: { _id: id } });
+    if (result.status !== 200) return res.status(result.status).json(result.data);
+    return res.json(result.data);
+});
+
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    const result = await deleteUser({ id });
+    if (result.status !== 200) return res.status(result.status).json(result.data);
+    return res.json(result.data);
+});
+
+router.post('/me', async (req, res) => {
+    const query = { filters: { _id: req.session.user._id }, fields: ['-password'] };
+    const result = await getUser(query);
+    if (result.status !== 200) return res.status(result.status).json(result.data);
+    return res.json(result.data);
 });
 
 module.exports = router;

@@ -3,6 +3,8 @@ const config = require('config');
 const { exec } = require('child_process');
 const fs = require('fs');
 const { promisify } = require('util');
+const _ = require('lodash');
+const jwt = require('./jwt');
 
 const sendRequest = async (configParams) => {
     const { user, accessKey, token, host, port } = config.get('jenkins');
@@ -56,10 +58,23 @@ const to = async (promise) => {
     }
 };
 
-exports.resolvePipline = async (configParams) => sendRequest({ ...configParams });
+const generatePayload = (user) => {
+    let payload;
+    try {
+        payload = _.pick(user, ['_id', 'cne', 'fullName']);
+        const token = jwt.sign(payload);
+        payload.token = token;
+    } catch (error) {
+        payload = { error };
+        /* console.log('error in generate payload ', error); */
+    }
+    return payload;
+};
 
 module.exports.send = (data, status = 200) => ({ data, status });
+exports.resolvePipline = async (configParams) => sendRequest({ ...configParams });
 
+module.exports.generatePayload = generatePayload;
 module.exports.writeFile = promisify(fs.writeFile);
 module.exports.appendFile = promisify(fs.appendFile);
 module.exports.to = to;
