@@ -69,14 +69,17 @@ async function buildAndRunDockerImage({ folderName, containerName, imageName, ex
     let step = 'Building the Docker image';
     logme(step);
     let result;
+    let HandledResult;
     if (!extra) {
         result = await exec(`cd /repos/${folderName}; docker build -t ${imageName} .`);
+        HandledResult = handleShellresult(result, step);
+        if (HandledResult.status !== 200) return send(HandledResult.data, HandledResult.status);
         console.log(step, result);
     }
     step = 'Running the docker image';
     logme(step);
     result = await exec(`docker run --name ${containerName} --rm -d --net ensas-net ${imageName}`);
-    let HandledResult = handleShellresult(result, step);
+    HandledResult = handleShellresult(result, step);
     let messageAfterReRunnung;
     if (HandledResult.status !== 200) {
         if (HandledResult.status === 600) {

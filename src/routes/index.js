@@ -4,4 +4,6 @@ module.exports = {
     buildRoute: require('./buld'),
     userRoutes: require('./user'),
     projectRoutes: require('./project'),
+    authentication: require('./authenticat'),
+
 };
