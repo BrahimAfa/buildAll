@@ -3,4 +3,6 @@ node_modules/
 github.json
 .env
 *.ensas-conf
+nginx/
 *.logs
+DB_SHARED_FILES/
