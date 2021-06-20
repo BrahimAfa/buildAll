@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-    const result = await getProject({ id });
+    const result = await getProject({ filters: { _id: id } });
     if (result.status !== 200) return res.status(result.status).json(result.data);
     return res.json(result.data);
 });
@@ -40,6 +40,5 @@ router.delete('/:id', async (req, res) => {
     if (result.status !== 200) return res.status(result.status).json(result.data);
     return res.json(result.data);
 });
-
 
 module.exports = router;

@@ -1,5 +1,16 @@
-FROM openjdk:8-jdk-alpine
+# src : https://medium.com/@tariqul.islam.rony/spring-boot-and-multi-stage-dockerized-image-with-mysql-in-docker-compose-part-3-2999b2bdf6aa
+FROM openjdk:8-jdk-alpine as build
+
 WORKDIR /app
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+RUN chmod +x ./mvnw
+RUN ./mvnw dependency:go-offline -B
+COPY src src
+RUN ./mvnw package -DskipTests
+
+####### STAGE 2 ############
+FROM openjdk:8-jre-alpine as production
+COPY --from=build /app/target/*.jar /app/app.jar
+CMD ["java", "-jar", "/app/app.jar", "--server.port=80"]

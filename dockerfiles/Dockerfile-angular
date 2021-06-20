@@ -1,6 +1,6 @@
 ### Stage 1: Build ###
-
-FROM node:14-alpine AS build
+## our custom image for with git already installed and only for building single page aaplication(spa)
+FROM brahimafa/front-spa as build
 WORKDIR /app
 COPY package.json ./
 RUN npm install

@@ -19,7 +19,7 @@ function handleShellresult(result, step) {
     return send(`Error Was Incoutred in step : ${step}`, 400);
 }
 
-async function cloneRepoAndAddDockerFile({ repository, projectType, folderName, extra },chnagedConfiguration) {
+async function cloneRepoAndAddDockerFile({ repository, projectType, folderName, extra }, chnagedConfiguration) {
     const step = 'Clonning the repo';
     logme(step);
     let result = await exec(`cd /repos; git clone ${repository} ${folderName}`); // FIXEME : add clone name to this!!
@@ -43,15 +43,17 @@ async function cloneRepoAndAddDockerFile({ repository, projectType, folderName, 
             if (!result.message) return send('[ERROR] There is No Solution file (.sln) in this repo ');
             const solutionPathSplited = result.message.split('/');
             solutionPathSplited.splice(solutionPathSplited.length - 1, 1);
-            solutionPathSplited.splice(0 ,2); // remove repos ['','rep']
+            solutionPathSplited.splice(0, 2); // remove repos ['','rep']
 
             const solutionFolder = solutionPathSplited.join('/');
             console.log('woooooooooow', solutionFolder);
             // eslint-disable-next-line no-param-reassign
             folderName = solutionFolder;
             chnagedConfiguration.folderName = solutionFolder;
-            if (HandledResult.status !== 200) return send(HandledResult.data, HandledResult.status);
             result = await copyFile(`${global.appRoot}/dockerfiles/entrypoint-core.sh`, `/repos/${folderName}/entrypoint.sh`);
+        } else if (type === 'angular') {
+            
+            result = await copyFile(`${global.appRoot}/dockerfiles/nginx-spa.conf`, `/repos/${folderName}/nginx.conf`);
         }
         result = await copyFile(`${global.appRoot}/dockerfiles/Dockerfile-${type}`, `/repos/${folderName}/Dockerfile`);
         console.log('[DONE] FILE COPY RESULT', result);

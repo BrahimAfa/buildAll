@@ -29,3 +29,31 @@ Content-Type: application/json
     "sqlFile": "file.sql"
 }
 
+###
+POST http://localhost:3333/deploy HTTP/1.1
+Content-Type: application/json
+
+# https://github.com/mohamederrajy/e-bankingClient.git
+
+# https://github.com/oussamaFst/e-banking-agent.git
+
+{
+    "customPort": 80,
+    "repository": "https://github.com/mohamederrajy/e-bankingClient.git",
+    "projectType": "angular"
+}
+
+
+###
+POST http://localhost:3333/deploy HTTP/1.1
+Content-Type: application/json
+
+# https://github.com/BrahimAfa/E-banking.git
+
+# https://github.com/oussamaFst/e-banking-agent.git
+
+{
+    "customPort": 80,
+    "repository": "https://github.com/BrahimAfa/E-banking.git",
+    "projectType": "angular"
+}

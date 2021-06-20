@@ -11,9 +11,14 @@ const createProject = async ({ body }) => {
     return send(result);
 };
 
-const getProject = async ({ id, fields = [] }) => {
+const createProjectForDeployment = async ({ body }) => {
+    const result = await getProject({ filters: { name: body.name } });
+    if (result.status === 200) return send(result.data);
+    return createProject({ body });
+};
+
+const getProject = async ({ filters = {}, fields = [] }) => {
     fields = fields.join(' ');
-    const filters = { _id: id };
     const { result, error } = await to(Project.findOne(filters, fields));
     if (error) return send(error.message, 400);
     if (!result) return send('project_not_found', 404);
@@ -52,4 +57,4 @@ const deleteProject = async ({ id }) => {
     return send(result);
 };
 
-module.exports = { createProject, getProject, getProjects, updateProject, deleteProject, deleteManyProjects };
+module.exports = { createProject, getProject, getProjects, updateProject, deleteProject, deleteManyProjects, createProjectForDeployment};
